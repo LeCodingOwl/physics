@@ -43,11 +43,21 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        console.log(this.bottle.velocity);
+        ;
+
+        console.log(this.bottle.y);
+
+        //Phaser.Physics.Matter.Body.rotate(this.bottle.body, 0.1);
         
-        if (this.bottle.velocity < -15)
+        if (this.bottle.y < 500)
         {
             Phaser.Physics.Matter.Matter.Body.rotate(this.bottle.body, 0.1);
+            console.log("In the air");
         }
+        else
+        {
+            console.log("On the ground");
+        }
+        
     }
 }
