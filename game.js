@@ -1,18 +1,18 @@
 var config = {
     type: Phaser.Auto,
-    width: 1920,
-    height: 1080,
+    width: 800,
+    height: 600,
     scale: {
       autoCenter: Phaser.Scale.CENTER_BOTH
     },
     physics: {
-      default: 'arcade',
-      arcade: {
-        //debug: true
-        
+      default: 'matter',
+      matter: {
+        gravity: { y: 0.9},
+        debug: true
       }
     },
-    scene: [Load, ]
+    scene: [Play]
   }
   
   var game = new Phaser.Game(config);
