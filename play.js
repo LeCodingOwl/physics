@@ -19,18 +19,21 @@ class Play extends Phaser.Scene {
         ground.scaleX = 15;
         ground.scaleY = 1;
 
+        //create water mass
+        this.water = this.matter.add.square()
+
         //create sprite bottle
-        this.bottle = this.matter.add.sprite(400, 100, "bottle", null, {
+        this.bottle = this.matter.add.sprite(400, 500, "bottle", null, {
             isStatic: false, 
             chamfer: 0 , 
-            render: { sprite: { xOffset: 0, yOffset: 0.30 } }
-        }).setBounce(0.4);
+            //render: { sprite: { xOffset: 0, yOffset: 0.30 } }
+        }).setBounce(0.3 );
         this.bottle.scaleX = 4;
         this.bottle.scaleY = 4;
 
         //bottle.body.setMass = 200;
         
-        Phaser.Physics.Matter.Matter.Body.setCentre(this.bottle.body, { x: 0, y: 23 }, true);
+        //Phaser.Physics.Matter.Matter.Body.setCentre(this.bottle.body, { x: 0, y: 23 }, true);
 
         //this.matter.add.mouseSpring({ length: 1, stiffness: 0.5 });
 
@@ -38,6 +41,7 @@ class Play extends Phaser.Scene {
         //Throw and flip bottle
         this.input.on('pointerdown', () => 
         {
+             this.flipDirection = Phaser.Math.Between(0,1);
             this.bottle.setVelocity(0, -15);
         });
     }
@@ -51,8 +55,15 @@ class Play extends Phaser.Scene {
         
         if (this.bottle.y < 500)
         {
-            Phaser.Physics.Matter.Matter.Body.rotate(this.bottle.body, 0.1);
             console.log("In the air");
+            if(this.flipDirection == 0)
+            {
+                Phaser.Physics.Matter.Matter.Body.rotate(this.bottle.body, 0.1);
+            }
+            else
+            {
+                Phaser.Physics.Matter.Matter.Body.rotate(this.bottle.body, -0.1);
+            }
         }
         else
         {
