@@ -127,7 +127,7 @@ class Play extends Phaser.Scene {
             this.bottle.scaleY = 3;
             this.setRotationSpeed = 0.2;
             this.level = 2;
-            this.scoreText.setText('Level: ' + this.level)
+            this.levelText.setText('Level: ' + this.level)
         }
         if (this.score == 10)
         {
@@ -136,7 +136,7 @@ class Play extends Phaser.Scene {
             this.bottle.scaleY = 2;
             this.setRotationSpeed = 0.4;
             this.level = 3;
-            this.scoreText.setText('Level: ' + this.level)
+            this.levelText.setText('Level: ' + this.level)
         }
         if (this.score == 15)
         {
