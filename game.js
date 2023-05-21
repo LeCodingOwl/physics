@@ -9,7 +9,7 @@ var config = {
       default: 'matter',
       matter: {
         gravity: { y: 0.9},
-        debug: true
+        debug: false,
       }
     },
     scene: [Play]
