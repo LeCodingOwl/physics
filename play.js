@@ -136,7 +136,7 @@ class Play extends Phaser.Scene {
         }
         if (this.score == 15)
         {
-            this.gotoScene('gameover');
+            this.scene.start("gameover");
         }
     }
 }
