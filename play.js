@@ -55,6 +55,8 @@ class Play extends Phaser.Scene {
              this.flipDirection = Phaser.Math.Between(0,1);
             this.bottle.setVelocity(0, -15);
             this.hasFlip = true;
+            this.startText.setVisible(false);
+            this.goalText.setVisible(false);
         });
 
         this.scoreText = this.add.text(10, 10, 'Score: 0', 
@@ -70,6 +72,17 @@ class Play extends Phaser.Scene {
             fill: '#ffffff'
         });
         this.level = 1;
+
+        this.startText = this.add.text(230, 250, 'Click anywhere to start flipping!', 
+        {
+            font: '24px Arial',
+            fill: '#ffffff'
+        });
+        this.goalText = this.add.text(315, 280, 'Goal: Get to 15', 
+        {
+            font: '24px Arial',
+            fill: '#ffffff'
+        });
     }
 
     update() {
@@ -107,13 +120,12 @@ class Play extends Phaser.Scene {
 
         }
         //Check score to move to next level
-        if (this.score == 1)
+        if (this.score == 5)
         {
             this.background.setTexture("background2");
             this.bottle.scaleX = 3;
             this.bottle.scaleY = 3;
             this.setRotationSpeed = 0.2;
-            this.scene.start("gameover");
         }
         if (this.score == 10)
         {
