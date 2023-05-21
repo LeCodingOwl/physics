@@ -9,7 +9,9 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image("bottle", "assets/sprites/bottle.png");
         this.load.image("platform", "assets/sprites/platform.png");
-        this.load.image("background", "assets/background/sky.png");
+        this.load.image("background1", "assets/background/sky.png");
+        this.load.image("background2", "assets/background/sky2.png");
+        this.load.image("background3", "assets/background/sky3.png");
     }
 
     create() {
@@ -20,9 +22,11 @@ class Play extends Phaser.Scene {
         //sets toss and landing
         this.hasFlip = false;
 
+        this.setRotationSpeed = 0.1;
+
         this.matter.world.setBounds();
         //create background
-        let background = this.add.sprite(400, 300, "background");
+        this.background = this.add.sprite(400, 300, "background1");
 
         //create platforms
         let ground = this.matter.add.sprite(400, 585, "platform", null, { isStatic: true});
@@ -63,6 +67,12 @@ class Play extends Phaser.Scene {
         });
         this.score = 0;
 
+        this.levelText = this.add.text(10, 40, 'Level: 1', 
+        {
+            font: '24px Arial',
+            fill: '#ffffff'
+        });
+        this.level = 1;
     }
 
     update() {
@@ -74,11 +84,11 @@ class Play extends Phaser.Scene {
             console.log("In the air");
             if(this.flipDirection == 0)
             {
-                Phaser.Physics.Matter.Matter.Body.rotate(this.bottle.body, 0.1);
+                Phaser.Physics.Matter.Matter.Body.rotate(this.bottle.body, this.setRotationSpeed);
             }
             else
             {
-                Phaser.Physics.Matter.Matter.Body.rotate(this.bottle.body, -0.1);
+                Phaser.Physics.Matter.Matter.Body.rotate(this.bottle.body, this.setRotationSpeed * -1);
             }
         }
         else
@@ -99,6 +109,20 @@ class Play extends Phaser.Scene {
             }
 
         }
-        
+        //Check score to move to next level
+        if (this.score == 5)
+        {
+            this.background.setTexture("background2");
+            this.bottle.scaleX = 3;
+            this.bottle.scaleY = 3;
+            this.setRotationSpeed = 0.2;
+        }
+        if (this.score == 10)
+        {
+            this.background.setTexture("background3");
+            this.bottle.scaleX = 2;
+            this.bottle.scaleY = 2;
+            this.setRotationSpeed = 0.4;
+        }
     }
 }
