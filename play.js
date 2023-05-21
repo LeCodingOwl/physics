@@ -42,9 +42,6 @@ class Play extends Phaser.Scene {
         this.bottle.scaleX = 4;
         this.bottle.scaleY = 4;
 
-        this.graphics = this.add.graphics({ lineStyle: { width: 4, color: 0xaa00aa } });
-        this.line = new Phaser.Geom.Line(400, 300, 200, 10);
-
         //const Bodies = Phaser.Physics.Matter.Matter.Bodies;
         this.bottle.body.setMass = 10;
         
@@ -110,12 +107,13 @@ class Play extends Phaser.Scene {
 
         }
         //Check score to move to next level
-        if (this.score == 5)
+        if (this.score == 1)
         {
             this.background.setTexture("background2");
             this.bottle.scaleX = 3;
             this.bottle.scaleY = 3;
             this.setRotationSpeed = 0.2;
+            this.scene.start("gameover");
         }
         if (this.score == 10)
         {
@@ -124,5 +122,28 @@ class Play extends Phaser.Scene {
             this.bottle.scaleY = 2;
             this.setRotationSpeed = 0.4;
         }
+        if (this.score == 15)
+        {
+            this.gotoScene('gameover');
+        }
     }
+}
+
+class GameOver extends Phaser.Scene {
+    constructor() {
+        super("gameover");
+
+    }
+    preload() {
+        this.cameras.main.setBackgroundColor(0x000000);
+    }
+
+    create() {
+        this.add.text(230, 300, 'Game Over. Thanks for playing!', 
+        {
+            font: '24px Arial',
+            fill: '#ffffff'
+        });
+    }
+    
 }
